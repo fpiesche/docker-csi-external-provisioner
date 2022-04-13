@@ -1,4 +1,4 @@
-FROM golang:1.17.8-alpine AS builder
+FROM golang:1.18.1-alpine AS builder
 
 RUN apk add --no-cache git make bash
 ADD external-provisioner/ /external-provisioner/
