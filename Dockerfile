@@ -1,7 +1,7 @@
 FROM golang:1.19.1-alpine AS builder
 
-RUN apk add --no-cache git make bash
-ADD external-provisioner/ /external-provisioner/
+RUN apk add --no-cache git make bash && \
+  git clone https://github.com/kubernetes-csi/external-provisioner.git /external-provisioner
 WORKDIR /external-provisioner
 RUN make
 
