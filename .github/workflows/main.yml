@@ -45,7 +45,7 @@ jobs:
         run: |
           # Check whether we can skip building the current tag
           if [[ $(curl https://registry.hub.docker.com/v2/repositories/florianpiesche/csi-external-provisioner/tags -o /dev/null -s -w "%{http_code}") != "404" ]]; then
-            SERVER_TAGS=$(curl -s https://registry.hub.docker.com/v2/repositories/${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}/tags | jq -r ".[].name")
+            SERVER_TAGS=$(curl -s https://registry.hub.docker.com/v2/repositories/${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}/tags | jq -r '."results"[]."name"')
             for tag in ${SERVER_TAGS[@]}; do
               if [[ "$tag" == "${EXTERNAL_PROVISIONER_VERSION}" ]]; then
                 echo "Release ${tag} has already been built."
